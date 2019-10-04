@@ -1,0 +1,10 @@
+
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.gz
+.DS_Store
+Kumar_ReprocWorkflow_IEEEBigData_2019.pdf
