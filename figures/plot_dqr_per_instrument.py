@@ -39,9 +39,9 @@ for i in range(len(traceslist)-1):
 layout = go.Layout(
       # Set title to plot
       title = "Data Quality Reports for each instrument",
-      font = dict(size=18, color="#330000"),
-	  xaxis = dict(title = "Instruments", titlefont=dict(size=18, color="#330000")),
-	  yaxis = dict(title = "Number of DQRs", titlefont=dict(size=18, color="#330000")),
+      font = dict(size=36, color="#330000"),
+	  xaxis = dict(title = "Instruments", titlefont=dict(size=48, color="#330000")),
+	  yaxis = dict(title = "Number of DQRs", titlefont=dict(size=48, color="#330000")),
 	  paper_bgcolor='rgb(255,255,255)', # background color
 	  plot_bgcolor='rgb(255,255,255)', # background color
       # Choose one of the barmode below and comment another
