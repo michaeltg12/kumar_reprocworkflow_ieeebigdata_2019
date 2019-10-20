@@ -1,0 +1,49 @@
+\section{Data versioning and archival}
+Once an updated version of data with improved data quality is prepared,
+it is formally assigned a version for tracking. However, versioning for
+complex data like those in ARM pose unique challenges which led to
+development of new data versioning system deployed across the facility
+\cite{Macduff_2014}. Data reprocessing to data quality improvement,
+however, at times leads to versioning conflict scenarios. Versioning
+module of the workflow extends the current versioning scheme
+\cite{Macduff_2014}.
+
+Standard ARM filename and versioning includes site, facility, instrument
+and start time of observation time series in filename. However, length
+of time series contained within the file are not reflected in the
+filename and thus creating conflict when data are reprocessed.
+ARM file standards also allow for any arbitrary number of files within a day
+during a real time processing, while reprocessing for data quality
+improvements on past data often create longer continuous time series and
+thus few files. To identify and address these conflicts all affected
+files (old and new) were checked for the start and end of the time
+series. In particular following scenarios occur frequently: 
+
+\begin{enumerate}
+ \item Near-real-time processing may create multiple partial day files
+ within a day (ex. fileA.v0: 00:00:00--12:00:00 and fileB.v0:
+ 12:00:01--24:00:00) if the observations from the remote instruments as
+ observations arrive at the data center in chunks 
+ due to network bandwidth or some other issue. However, the reprocessing
+ for the data may create a single file with continuous time series 
+ (ex. fileA: 00:00:00--24:00:00).
+ While the filename of the newly created file would be same as one of
+ the existing files and will be assigned the correct incremental
+ version number (ex. fileA.v1: 00:00:00--24:00:00), the rest of the 
+ old files (ex. fileB: 12:00:01--24:00:00) from the day would identified
+ and marked to be obsolete and marked unavailable in future.
+ \item File versioning tracks the versions of a filename, but during the
+ process of reprocessing it's possible for new filenames to be created.
+ For example, if data in original fileA.v0: 01:00:00--24:00:00 was
+ reprocessed to correct the quality issue during first hour of the day
+ that was excluded for the original processing, a new fileB.v0:
+ 00:00:00--24:00:00 will be created and while no filename conflict occur
+ with fileA.v0, fileA.v0 must be deleted and marked unavailable to avoid
+ conflicting time series data.
+\end{enumerate}
+
+Once the file has been assigned the correct name and version, it is
+archived in the deep archive on HPSS and a copy is placed on new data
+cache while the older data are made unavailable. ARM's comprehensive
+database of all file holdings are also updated as a part of the archival step.
+

@@ -7,4 +7,5 @@
 *.log
 *.gz
 .DS_Store
+*.bak
 Kumar_ReprocWorkflow_IEEEBigData_2019.pdf
